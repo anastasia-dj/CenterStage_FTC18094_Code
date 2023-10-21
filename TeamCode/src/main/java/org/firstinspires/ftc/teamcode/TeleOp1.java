@@ -214,7 +214,8 @@ public class TeleOp1 extends LinearOpMode {
     public double limit(double value, int max_num) {
         return Math.max(0, Math.min(value, max_num));
     }
-    //I don't know what this is??? ^^^^
+    //It takes two numbers and finds the smaller of the two (Math.min)
+    //if the num is neg, return 0 (else return the number)
 
     public void reset_encoders() {
         robot.armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
