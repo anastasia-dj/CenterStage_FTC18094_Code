@@ -3,12 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.Range;
+//import com.qualcomm.robotcore.util.Range;
+//Commented both import statements out because android studio was mad at me for not using it
 
-import java.security.KeyStore;
+//import java.security.KeyStore;
 
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group = "LinearOpMode")
+@SuppressWarnings("unused")
 public class TeleOp1 extends LinearOpMode {
     DrivingBot robot;
     double max_pow = 0.6;
@@ -211,12 +213,13 @@ public class TeleOp1 extends LinearOpMode {
         ((DcMotorEx) robot.elbow).setVelocity(velocity); //sets the velocity of the elbow
     }
 
+    @SuppressWarnings("unused")
     public double limit(double value, int max_num) {
         return Math.max(0, Math.min(value, max_num));
     }
     //It takes two numbers and finds the smaller of the two (Math.min)
     //if the num is neg, return 0 (else return the number)
-
+    @SuppressWarnings("unused")
     public void reset_encoders() {
         robot.armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
         robot.armRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
