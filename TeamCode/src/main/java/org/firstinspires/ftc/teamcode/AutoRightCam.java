@@ -43,6 +43,7 @@ public class AutoRightCam extends LinearOpMode {
         //choose cap position during init
         while (!opModeIsActive()) {
 
+            //case determination below
             if (robot.pipeline.isCapLeft()) {
                 capPosition = 2;
                 telemetry.addData("Cone", "Orange");

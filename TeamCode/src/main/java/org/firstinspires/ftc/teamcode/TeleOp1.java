@@ -1,4 +1,22 @@
 package org.firstinspires.ftc.teamcode;
+//Initialization is useful for camera
+//init not for movement??/
+//setting camera u can reuse
+//colors u'll have to look more into ftc machine learning
+//sensors different (duh)
+//look into sensors
+//driving bot file
+//where u initialize everything ^^^^^ (might have to change a few names, servos, etc etc etc) <- template stays the same
+//functions at end of file that are like general move forward close claw
+//Framework for teleop and auto are basically the same
+    //Teleop: keep drivetrain
+    //Auto: will have to be changed
+//Only drive train should really be the same
+//Try not to reuse arm (IT WAS A MESSSSSS)
+//Scissor lift will probs have motor going clockwise or counterclockwise
+    //Elbow??? move at the same time????? how will this work??/
+    //Elbow + scissor lift at same time = angle
+//Claw will be the same
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -219,6 +237,8 @@ public class TeleOp1 extends LinearOpMode {
     }
     //It takes two numbers and finds the smaller of the two (Math.min)
     //if the num is neg, return 0 (else return the number)
+    //probably experiment, test out calculate motor movement (used limit as var, didn't end up using it)
+    //probably dont need this
     @SuppressWarnings("unused")
     public void reset_encoders() {
         robot.armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor

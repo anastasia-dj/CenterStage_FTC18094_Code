@@ -228,6 +228,10 @@ public class DrivingBot {
     public void openClaw() {
         claw.setPosition(0);
     }
+    //When attactching servo, make sure to reset it so that it starts at 0
+    //Setsposition just moves it from position
+    //1 == 360
+    //Motors you can start position and set it to zero, not completely set like how servo is
 
     public boolean isRobotMoving() {
         if (FLMoving)
@@ -277,6 +281,8 @@ public class DrivingBot {
     // CAMERA STUFF 5 (lines 278 - 285)
     public void closeCameraAsync() {
         webcam.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
+            //when the camera opens, make sure some parts are opened and initialized
+            //general camera thing
             @Override
             public void onClose() {
 

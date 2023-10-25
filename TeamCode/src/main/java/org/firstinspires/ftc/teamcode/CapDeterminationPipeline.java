@@ -16,10 +16,13 @@ public class CapDeterminationPipeline extends OpenCvPipeline {
     }
 
     //color constants
-    static final Scalar BLUE = new Scalar(0, 0, 255);
-    static final Scalar GREEN = new Scalar(0, 255, 0);
-    static final Scalar PURPLE = new Scalar(128, 0, 128);
-    static final Scalar ORANGE = new Scalar(255, 165, 0);
+    static final Scalar BLUE = new Scalar(0, 0, 255); // <-- Mark on camera
+    static final Scalar GREEN = new Scalar(0, 255, 0); //Colors on cone RGB values
+    static final Scalar PURPLE = new Scalar(128, 0, 128); //Colors on cone RGB values
+    static final Scalar ORANGE = new Scalar(255, 165, 0); //Colors on cone RGB values
+
+    //Last year: game was identfy the color on the cone and then move based on color on cone
+    // Blue
 
 
     //sets points
@@ -102,6 +105,21 @@ public class CapDeterminationPipeline extends OpenCvPipeline {
                     region_pointB, // Second point which defines the rectangle
                     PURPLE, // The color the rectangle is drawn in
                     -1); // Negative thickness means solid fill
+
+
+            //Camera points at where cone is
+            //Based off of that (not most efficient way, Tanya recommends another way) is pointed at
+            // a square (only focus on CONE) all extra stuff is in the way so
+            // focus through area (boxed area) where estimated cone will be
+            // Square area will be outlined in blue (POINT OF THE BLUE THING MENTIONED EARLIER)
+            // Average the number of CR / CB (how much red is in the picture?? etc)
+            // How much color is in that box???
+
+
+            //Machine learning 4 barcode codes
+            //Compare qr code to tested value
+            //FTC PROVIDED RESOURCES!!!!
+            //CHECK OUT OTHER TEAMS!!! AND GET HELP FROM OTHER TEAMMSSSS!!!! (used from last year)
         }
 
         return input;

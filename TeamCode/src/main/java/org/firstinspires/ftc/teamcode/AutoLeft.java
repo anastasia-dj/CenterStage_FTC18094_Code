@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
-
+//AUTO LEFT AND AUTO RIGHT ARE JUST BASICALLY FLIPPED OF EACH OTHER
+//LEARN FROM OTHER TEAMS AND THEIR CODE, THIS CODE IS NOT THE MOST EFFICIENT
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;

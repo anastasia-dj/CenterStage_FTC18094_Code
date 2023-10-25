@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
-
+//Literally just testing a camera
+//Kinda unused
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;

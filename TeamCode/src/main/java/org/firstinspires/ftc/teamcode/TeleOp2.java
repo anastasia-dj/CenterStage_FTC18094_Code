@@ -23,9 +23,12 @@ public void runOpMode(){
         waitForStart();
 
         while(opModeIsActive()){
+            //All this basically calculates like move joystick left robot move left
+            //Same as TeleOp1??
             // Read inverse IMU heading, as the IMU heading is CW positive
             double heading = -robot.imu.getAngularOrientation().firstAngle;
 
+            //control movement of robot based on angle as well (EX: move joystick diagonally, robot moves diagonally)
             double rotX = gamepad1.left_stick_x * Math.cos(heading) - (-gamepad1.left_stick_y) * Math.sin(heading);
             double rotY = gamepad1.left_stick_x * Math.sin(heading) + (-gamepad1.left_stick_y) * Math.cos(heading);
 

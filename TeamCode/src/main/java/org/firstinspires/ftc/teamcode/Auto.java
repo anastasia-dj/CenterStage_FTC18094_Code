@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto", group = "LinearOpMode")
-@Disabled
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto", group = "LinearOpMode") //Declares as autonomous file, SDK thing
+@Disabled //not on drivers hub
 public class Auto extends LinearOpMode {
     DrivingBot robot;
 
@@ -59,7 +59,7 @@ public class Auto extends LinearOpMode {
 
         waitForStart();
 
-        while (opModeIsActive()) {
+        while (opModeIsActive() && !isStopRequested()) { //op mode is active and stopped is not pressed
 
             moveElbow(0.6, 0);
             moveArm(0.5, -83);
