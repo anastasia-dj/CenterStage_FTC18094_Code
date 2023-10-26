@@ -26,15 +26,17 @@ public class DrivingBot {
     public DcMotor FL;
     public DcMotor BR;
     public DcMotor BL;
-    public DcMotor armLeft;
+    /*public DcMotor armLeft;
     public DcMotor armRight;
     public DcMotor elbow;
-    //public DcMotor claw;
-    public BNO055IMU imu;
-    public Servo claw;
+    //public DcMotor claw;*/
+    //
+    //public BNO055IMU imu;
+    //check whether we have orientation sensor for robot
+    //public Servo claw; CLAWWW HEREE!!!
 
-    public WebcamName camera; // CAMERA STUFF 1
-    OpenCvCamera webcam; // CAMERA STUFF 2
+   // public WebcamName camera; // CAMERA STUFF 1
+   // OpenCvCamera webcam; // CAMERA STUFF 2
 
     static final double COUNTS_PER_MOTOR_REV = 560;
     static final double DRIVE_GEAR_REDUCTION = 1;     // This is < 1.0 if geared UP
@@ -42,7 +44,7 @@ public class DrivingBot {
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
-    CapDeterminationPipeline pipeline; // CAMERA STUFF 3
+    //CapDeterminationPipeline pipeline; // CAMERA STUFF 3
 
 
     /* local OpMode members. */
@@ -69,18 +71,18 @@ public class DrivingBot {
         BR = hwMap.dcMotor.get("BR");
         BL = hwMap.dcMotor.get("BL");
 
-        armLeft = hwMap.dcMotor.get("arm left");
+        /*armLeft = hwMap.dcMotor.get("arm left");
         armRight = hwMap.dcMotor.get("arm right");
-        elbow = hwMap.dcMotor.get("elbow");
+        elbow = hwMap.dcMotor.get("elbow");*/
 
         // set motors' direction
         FL.setDirection(DcMotor.Direction.FORWARD);
         FR.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.FORWARD);
         BR.setDirection(DcMotor.Direction.REVERSE);
-        armRight.setDirection(DcMotor.Direction.FORWARD);
+        /*armRight.setDirection(DcMotor.Direction.FORWARD);
         armLeft.setDirection(DcMotor.Direction.REVERSE);
-        elbow.setDirection(DcMotor.Direction.FORWARD);
+        elbow.setDirection(DcMotor.Direction.FORWARD);*/
 
 
 
@@ -89,24 +91,24 @@ public class DrivingBot {
         FL.setPower(0);
         BR.setPower(0);
         BL.setPower(0);
-        armLeft.setPower(0);
+        /*armLeft.setPower(0);
         armRight.setPower(0);
-        elbow.setPower(0);
+        elbow.setPower(0);*/
 
-        claw = hwMap.servo.get("claw");
+        //claw = hwMap.servo.get("claw");
 
         FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        /*armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elbow.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elbow.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
 
-        armLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        /*armLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elbow.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        elbow.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
 
 
 
@@ -117,20 +119,20 @@ public class DrivingBot {
 
         // Define and initialize ALL installed servos.
 
-        imu = hwMap.get(BNO055IMU.class, "imu");
+       /* imu = hwMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters);
+        imu.initialize(parameters); */
 
         // CAMERA STUFF 4 (lines 119 - 126)
         // Set sensors
-        camera = hwMap.get(WebcamName.class, "camera");
+        /*camera = hwMap.get(WebcamName.class, "camera");
 
         // camera set-up
         int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(camera, cameraMonitorViewId);
         pipeline = new CapDeterminationPipeline();
-        webcam.setPipeline(pipeline);
+        webcam.setPipeline(pipeline);*/
 
 
 
@@ -221,13 +223,13 @@ public class DrivingBot {
     }
 
 
-    public void closeClaw() {
+    /*public void closeClaw() {
         claw.setPosition(0.4);
     }
 
     public void openClaw() {
         claw.setPosition(0);
-    }
+    }*/
     //When attactching servo, make sure to reset it so that it starts at 0
     //Setsposition just moves it from position
     //1 == 360
@@ -262,24 +264,24 @@ public class DrivingBot {
     }
 
 
-    public void moveArm(double velocity, int position) {
+    /*public void moveArm(double velocity, int position) {
         armLeft.setTargetPosition(position);
         armRight.setTargetPosition(position);
         armLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ((DcMotorEx) armLeft).setVelocity(velocity);
         ((DcMotorEx) armRight).setVelocity(velocity);
-    }
+    }*/
 
-    public void moveElbow(double velocity, int position) {
+    /*public void moveElbow(double velocity, int position) {
         elbow.setTargetPosition(position);
         elbow.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //robot.elbow.setPower(velocity);
         ((DcMotorEx) elbow).setVelocity(velocity);
-    }
+    }*/
 
     // CAMERA STUFF 5 (lines 278 - 285)
-    public void closeCameraAsync() {
+    /*public void closeCameraAsync() {
         webcam.closeCameraDeviceAsync(new OpenCvCamera.AsyncCameraCloseListener() {
             //when the camera opens, make sure some parts are opened and initialized
             //general camera thing
@@ -288,7 +290,7 @@ public class DrivingBot {
 
             }
         });
-    }
+    }*/
 
 
 }
