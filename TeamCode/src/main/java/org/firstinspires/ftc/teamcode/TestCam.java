@@ -1,4 +1,8 @@
-package org.firstinspires.ftc.teamcode;
+
+//This whole file is camera stuff, and we don't have a camera yet. I highly doubt having this code will interfere with
+//anything but just thought to comment it out :)
+
+/*package org.firstinspires.ftc.teamcode;
 //Literally just testing a camera
 //Kinda unused
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -68,3 +72,6 @@ public class TestCam extends LinearOpMode {
         // robot.webcam.closeCameraDevice();
     }
 }
+
+
+ */

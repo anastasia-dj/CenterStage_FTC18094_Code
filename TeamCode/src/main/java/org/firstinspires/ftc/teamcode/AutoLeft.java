@@ -20,7 +20,7 @@ public class AutoLeft extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot = new DrivingBot();
         robot.init(hardwareMap);
-        telemetry.addData("arm", robot.armLeft.getCurrentPosition());
+       // telemetry.addData("arm", robot.armLeft.getCurrentPosition());
 
         //start camera
         /*robot.webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -60,7 +60,7 @@ public class AutoLeft extends LinearOpMode {
          */
 
 
-        robot.openClaw();
+        //robot.openClaw();
 
         telemetry.addData("Status", "Ready!");
         telemetry.update();
@@ -69,7 +69,7 @@ public class AutoLeft extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            goLeft();
+            //goLeft();
             /*switch (capPosition) {
                 case 0: // Orange
                     telemetry.addData("Path", "Going Left");
@@ -98,7 +98,7 @@ public class AutoLeft extends LinearOpMode {
 
     }
 
-    public void goLeft() { // ORANGE
+    /*public void goLeft() { // ORANGE
         robot.closeClaw();
         sleep(2000);
         robot.moveForwardTo(0.4, 19);
@@ -210,5 +210,5 @@ public class AutoLeft extends LinearOpMode {
         //robot.elbow.setPower(velocity);
         ((DcMotorEx) robot.elbow).setVelocity(velocity);
     }
-
+*/
 }

@@ -43,9 +43,9 @@ public void runOpMode(){
             robot.FR.setPower(frontRightPower);
             robot.BR.setPower(backRightPower);
 
-            moveArm(gamepad2.right_stick_y);
-            telemetry.addData("left arm", robot.armLeft.getCurrentPosition());
-            telemetry.addData("right arm", robot.armRight.getCurrentPosition());
+            //moveArm(gamepad2.right_stick_y);
+            //telemetry.addData("left arm", robot.armLeft.getCurrentPosition());
+            //telemetry.addData("right arm", robot.armRight.getCurrentPosition());
 
 
             /*double angle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
@@ -67,9 +67,9 @@ public void runOpMode(){
         }
     }
 
-    public void moveArm(double power){
+    /*public void moveArm(double power){
         robot.armLeft.setPower(max_arm_pow * power);
         robot.armRight.setPower(max_arm_pow * power);
-    }
+    }*/
     
 }

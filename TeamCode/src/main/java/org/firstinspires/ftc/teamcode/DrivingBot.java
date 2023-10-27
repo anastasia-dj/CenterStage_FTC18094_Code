@@ -31,7 +31,7 @@ public class DrivingBot {
     public DcMotor elbow;
     //public DcMotor claw;*/
     //
-    //public BNO055IMU imu;
+    public BNO055IMU imu;
     //check whether we have orientation sensor for robot
     //public Servo claw; CLAWWW HEREE!!!
 

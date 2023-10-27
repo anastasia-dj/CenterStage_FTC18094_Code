@@ -1,4 +1,10 @@
-package org.firstinspires.ftc.teamcode;
+//This file is kind of tying arm and color together, but it's during the auto stage.
+// Since we're so early, I don't think we'll work on it quite yet
+// but maybe soon we'd want to uncomment this code and check out which parts we can use
+// for our own autonomous stage.
+
+
+/*package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -219,3 +225,4 @@ public class AutoRightCam extends LinearOpMode {
         ((DcMotorEx) robot.elbow).setVelocity(velocity);
     }
 }
+*/

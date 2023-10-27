@@ -44,7 +44,7 @@ public class TeleOp1 extends LinearOpMode {
         telemetry.update();
         //Updates the monitor so it shows
 
-        robot.claw.setPosition(0);
+        //robot.claw.setPosition(0);
         //Move claw to lowest position??
 
         waitForStart();
@@ -53,11 +53,11 @@ public class TeleOp1 extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) { // reset arm from init
             telemetry.addData("Status", "opMode");
-            telemetry.addData("elbow", robot.elbow.getCurrentPosition());
+           /* telemetry.addData("elbow", robot.elbow.getCurrentPosition());
             telemetry.addData("claw", robot.claw.getPosition());
             telemetry.addData("arm v", ((DcMotorEx) robot.elbow).getVelocity());
             telemetry.addData("left arm", robot.armLeft.getCurrentPosition());
-            telemetry.addData("right arm", robot.armRight.getCurrentPosition());
+            telemetry.addData("right arm", robot.armRight.getCurrentPosition());*/
             telemetry.addData("max power", max_pow);
             //telemetry.update();
 
@@ -68,7 +68,7 @@ public class TeleOp1 extends LinearOpMode {
                 medium goal: elbow = 315, arm = 250
                 high goal: elbow = 460, arm = 360
              */
-            if (gamepad2.x) { // if x is pressed... rest/intake
+            /*if (gamepad2.x) { // if x is pressed... rest/intake
                 if (robot.armLeft.getCurrentPosition() <= 260) { // move to rest from low arm position
                     moveArm(300,0);
                     moveElbow(230, 0);
@@ -87,7 +87,9 @@ public class TeleOp1 extends LinearOpMode {
                     moveArm(250, 0);
 
                 }
-                robot.armLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT); //When motor is off, arm can freely move
+
+             */
+             /*   robot.armLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT); //When motor is off, arm can freely move
                 robot.armRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT); // for this too
                 robot.elbow.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT); // and this
 
@@ -116,9 +118,12 @@ public class TeleOp1 extends LinearOpMode {
                     moveElbow(700, 490);
                 }
             }
-
+            */
             // ADJUST
-            if (gamepad2.dpad_right) { //if u press the right arrow (dpad), move arm right
+
+
+
+            /*if (gamepad2.dpad_right) { //if u press the right arrow (dpad), move arm right
                 moveArm(700, robot.armRight.getCurrentPosition() + 15);
             } else if (gamepad2.dpad_left) { // if u press the left arrow (dpad), move arm left
                 moveArm(700, robot.armRight.getCurrentPosition() - 15);
@@ -135,7 +140,8 @@ public class TeleOp1 extends LinearOpMode {
                 robot.claw.setPosition(0.5);
             } else if (gamepad2.right_bumper) { // if right bumper is pressed open claw
                 robot.claw.setPosition(0);
-            }
+            } */
+
 
 
 
@@ -215,7 +221,7 @@ public class TeleOp1 extends LinearOpMode {
 
 
 
-    public void moveArm(double velocity, int position) {
+    /*public void moveArm(double velocity, int position) {
         robot.armLeft.setTargetPosition(position); //hey left arm, "position" is where you want to go
         robot.armRight.setTargetPosition(position); //hey right arm, "position" is where you want to go
         robot.armLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAARRRGEEE LEFT ARMM!!!! (go to the set target position)
@@ -231,6 +237,8 @@ public class TeleOp1 extends LinearOpMode {
         ((DcMotorEx) robot.elbow).setVelocity(velocity); //sets the velocity of the elbow
     }
 
+     */
+
     @SuppressWarnings("unused")
     public double limit(double value, int max_num) {
         return Math.max(0, Math.min(value, max_num));
@@ -239,12 +247,12 @@ public class TeleOp1 extends LinearOpMode {
     //if the num is neg, return 0 (else return the number)
     //probably experiment, test out calculate motor movement (used limit as var, didn't end up using it)
     //probably dont need this
-    @SuppressWarnings("unused")
-    public void reset_encoders() {
+    //@SuppressWarnings("unused")
+    /*public void reset_encoders() {
         robot.armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
         robot.armRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
         robot.elbow.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
-    }
+    }*/
 }
 
 

@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode;
 //AUTO LEFT AND AUTO RIGHT ARE JUST BASICALLY FLIPPED OF EACH OTHER
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -21,7 +22,7 @@ public class AutoRight extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot = new DrivingBot();
         robot.init(hardwareMap);
-        telemetry.addData("arm", robot.armLeft.getCurrentPosition());
+        //telemetry.addData("arm", robot.armLeft.getCurrentPosition());
 
         //start camera
        /* robot.webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -68,7 +69,7 @@ public class AutoRight extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            goLeft();
+            //goLeft();
 
             /*switch (capPosition) {
                 case 0: // Orange
@@ -99,7 +100,7 @@ public class AutoRight extends LinearOpMode {
 
     }
 
-    public void goLeft() { // ORANGE
+    /*public void goLeft() { // ORANGE
         robot.closeClaw();
         sleep(2000);
         robot.moveForwardTo(0.4, 19);
@@ -115,9 +116,9 @@ public class AutoRight extends LinearOpMode {
         robot.moveLeftTo(0.3, 12);
         restArm();
         sleep(2000);
-    }
+    }*/
 
-    public void goCenter() { // GREEN
+    /*public void goCenter() { // GREEN
         robot.closeClaw();
         sleep(2000);
         robot.moveForwardTo(0.4, 19);
@@ -134,9 +135,9 @@ public class AutoRight extends LinearOpMode {
         robot.moveBackwardTo(0.2, 3);
         restArm();
         sleep(2000);
-    }
+    }*/
 
-    public void goRight() { // PURPLE
+    /*public void goRight() { // PURPLE
         robot.closeClaw();
         sleep(2000);
         robot.moveForwardTo(0.4, 19);
@@ -156,9 +157,9 @@ public class AutoRight extends LinearOpMode {
         robot.moveRightTo(0.4, 15);
         restArm();
         sleep(2000);
-    }
+    }*/
 
-
+/*
     public void lowArm() {
         moveElbow(900, 220);
         moveArm(300, 0);
@@ -212,4 +213,6 @@ public class AutoRight extends LinearOpMode {
         //robot.elbow.setPower(velocity);
         ((DcMotorEx) robot.elbow).setVelocity(velocity);
     }
+    */
+
 }

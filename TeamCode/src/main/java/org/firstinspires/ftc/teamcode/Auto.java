@@ -18,7 +18,7 @@ public class Auto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot = new DrivingBot();
         robot.init(hardwareMap);
-        telemetry.addData("arm", robot.armLeft.getCurrentPosition());
+        //telemetry.addData("arm", robot.armLeft.getCurrentPosition());
 /*
         //start camera
         robot.webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -59,7 +59,7 @@ public class Auto extends LinearOpMode {
 
         waitForStart();
 
-        while (opModeIsActive() && !isStopRequested()) { //op mode is active and stopped is not pressed
+       /*while (opModeIsActive() && !isStopRequested()) { //op mode is active and stopped is not pressed
 
             moveElbow(0.6, 0);
             moveArm(0.5, -83);
@@ -76,12 +76,12 @@ public class Auto extends LinearOpMode {
             robot.moveForwardTo(0.5, 22);
             sleep(3000);
             break;
-        }
-        robot.stopMoving();
+        }*/
+       // robot.stopMoving();
 
     }
 
-    public void goLeft() {
+    /*public void goLeft() {
         robot.moveForwardTo(0.4, 3);
         robot.moveLeftTo(0.4, 20);
         robot.moveForwardTo(0.4, 20);
@@ -129,5 +129,5 @@ public class Auto extends LinearOpMode {
         robot.elbow.setTargetPosition(position);
         robot.elbow.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.elbow.setPower(power * 0.3);
-    }
+    }*/
 }

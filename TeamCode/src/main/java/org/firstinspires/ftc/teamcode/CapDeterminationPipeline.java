@@ -1,4 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+//This whole file is in regards to determining what color and position the cone is. The color
+//might be useful but considering that we're using the april tags this year
+//I'm not sure how much of it we can use.
+
+
+/*package org.firstinspires.ftc.teamcode;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -139,3 +144,5 @@ public class CapDeterminationPipeline extends OpenCvPipeline {
     }
 
 }
+
+ */
