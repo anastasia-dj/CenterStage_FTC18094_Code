@@ -21,10 +21,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-//import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.Range;
 //Commented both import statements out because android studio was mad at me for not using it
 
-//import java.security.KeyStore;
+import java.security.KeyStore;
 
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group = "LinearOpMode")
@@ -44,7 +44,8 @@ public class TeleOp1 extends LinearOpMode {
         telemetry.update();
         //Updates the monitor so it shows
 
-        //robot.claw.setPosition(0);
+        //Todo: check this with the actual robot
+        robot.claw.setPosition(0.3);
         //Move claw to lowest position??
 
         waitForStart();
@@ -53,13 +54,11 @@ public class TeleOp1 extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) { // reset arm from init
             telemetry.addData("Status", "opMode");
-           /* telemetry.addData("elbow", robot.elbow.getCurrentPosition());
             telemetry.addData("claw", robot.claw.getPosition());
-            telemetry.addData("arm v", ((DcMotorEx) robot.elbow).getVelocity());
-            telemetry.addData("left arm", robot.armLeft.getCurrentPosition());
-            telemetry.addData("right arm", robot.armRight.getCurrentPosition());*/
+            telemetry.addData("arm v", ((DcMotorEx) robot.wrist).getVelocity());
+            telemetry.addData("left arm", robot.arm.getCurrentPosition());
             telemetry.addData("max power", max_pow);
-            //telemetry.update();
+            telemetry.update();
 
             // ARM
             /*
@@ -221,23 +220,20 @@ public class TeleOp1 extends LinearOpMode {
 
 
 
-    /*public void moveArm(double velocity, int position) {
-        robot.armLeft.setTargetPosition(position); //hey left arm, "position" is where you want to go
-        robot.armRight.setTargetPosition(position); //hey right arm, "position" is where you want to go
-        robot.armLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAARRRGEEE LEFT ARMM!!!! (go to the set target position)
-        robot.armRight.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAAARRRGEEE RIGHT ARMM!!!! (go to the set target position)
-        ((DcMotorEx) robot.armLeft).setVelocity(velocity); //sets the velocity of the left arm
-        ((DcMotorEx) robot.armRight).setVelocity(velocity); //sets the velocity of the right arm
+    public void moveArm(double velocity, int position) {
+        robot.arm.setTargetPosition(position); //hey arm, "position" is where you want to go
+        robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAAARRRGEEE ARMM!!!! (go to the set target position)
+        ((DcMotorEx) robot.arm).setVelocity(velocity); //sets the velocity of the arm
     }
 
-    public void moveElbow(double velocity, int position) {
-        robot.elbow.setTargetPosition(position); //hey elbow, "position" is where you want to go
-        robot.elbow.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAARRRGGEEE ELBOWW!!! (go to the set target position)
+    public void moveWrist(double velocity, int position) {
+        robot.wrist.setTargetPosition(position); //hey elbow, "position" is where you want to go
+        robot.wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAARRRGGEEE ELBOWW!!! (go to the set target position)
         //robot.elbow.setPower(velocity);
-        ((DcMotorEx) robot.elbow).setVelocity(velocity); //sets the velocity of the elbow
+        ((DcMotorEx) robot.wrist).setVelocity(velocity); //sets the velocity of the elbow
     }
 
-     */
+
 
     @SuppressWarnings("unused")
     public double limit(double value, int max_num) {
@@ -248,11 +244,11 @@ public class TeleOp1 extends LinearOpMode {
     //probably experiment, test out calculate motor movement (used limit as var, didn't end up using it)
     //probably dont need this
     //@SuppressWarnings("unused")
-    /*public void reset_encoders() {
-        robot.armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
-        robot.armRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
-        robot.elbow.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
-    }*/
+
+    public void reset_encoders() {
+        robot.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
+        robot.wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
+    }
 }
 
 
