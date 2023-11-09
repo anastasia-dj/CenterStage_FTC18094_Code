@@ -71,9 +71,9 @@ public class DrivingBot {
         FL = hwMap.dcMotor.get("FL");
         BR = hwMap.dcMotor.get("BR");
         BL = hwMap.dcMotor.get("BL");
-        arm = hwMap.dcMotor.get("arm");
+        //arm = hwMap.dcMotor.get("arm");
         //wrist = hwMap.dcMotor.get("claw"); I think this is already declared in the variable `claw`
-        claw = hwMap.servo.get("claw");
+        //claw = hwMap.servo.get("claw");
 
         // set motors' direction
         FL.setDirection(DcMotor.Direction.FORWARD);
@@ -81,8 +81,8 @@ public class DrivingBot {
         BL.setDirection(DcMotor.Direction.FORWARD);
         BR.setDirection(DcMotor.Direction.REVERSE);
 
-        arm.setDirection(DcMotor.Direction.REVERSE);
-        wrist.setDirection(DcMotor.Direction.FORWARD);
+        //arm.setDirection(DcMotor.Direction.REVERSE);
+        //wrist.setDirection(DcMotor.Direction.FORWARD);
         //TODO: Add correct motion directions for motors!!!!
 
 
@@ -91,8 +91,8 @@ public class DrivingBot {
         FL.setPower(0);
         BR.setPower(0);
         BL.setPower(0);
-        arm.setPower(0);
-        wrist.setPower(0);
+        //arm.setPower(0);
+        //wrist.setPower(0);
 
 
 
@@ -101,8 +101,8 @@ public class DrivingBot {
         BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
