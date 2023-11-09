@@ -26,14 +26,15 @@ public class DrivingBot {
     public DcMotor FL;
     public DcMotor BR;
     public DcMotor BL;
+    public DcMotor arm;
+    public DcMotor wrist;
+
     /*public DcMotor armLeft;
     public DcMotor armRight;
     public DcMotor elbow;
     //public DcMotor claw;*/
     //
-    public BNO055IMU imu;
-    //check whether we have orientation sensor for robot
-    //public Servo claw; CLAWWW HEREE!!!
+    public Servo claw;
 
    // public WebcamName camera; // CAMERA STUFF 1
    // OpenCvCamera webcam; // CAMERA STUFF 2
@@ -70,20 +71,19 @@ public class DrivingBot {
         FL = hwMap.dcMotor.get("FL");
         BR = hwMap.dcMotor.get("BR");
         BL = hwMap.dcMotor.get("BL");
-
-        /*armLeft = hwMap.dcMotor.get("arm left");
-        armRight = hwMap.dcMotor.get("arm right");
-        elbow = hwMap.dcMotor.get("elbow");*/
+        arm = hwMap.dcMotor.get("arm");
+        //wrist = hwMap.dcMotor.get("claw"); I think this is already declared in the variable `claw`
+        claw = hwMap.servo.get("claw");
 
         // set motors' direction
         FL.setDirection(DcMotor.Direction.FORWARD);
         FR.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.FORWARD);
         BR.setDirection(DcMotor.Direction.REVERSE);
-        /*armRight.setDirection(DcMotor.Direction.FORWARD);
-        armLeft.setDirection(DcMotor.Direction.REVERSE);
-        elbow.setDirection(DcMotor.Direction.FORWARD);*/
 
+        arm.setDirection(DcMotor.Direction.REVERSE);
+        wrist.setDirection(DcMotor.Direction.FORWARD);
+        //TODO: Add correct motion directions for motors!!!!
 
 
         // set all motors to zero power
@@ -91,48 +91,18 @@ public class DrivingBot {
         FL.setPower(0);
         BR.setPower(0);
         BL.setPower(0);
-        /*armLeft.setPower(0);
-        armRight.setPower(0);
-        elbow.setPower(0);*/
+        arm.setPower(0);
+        wrist.setPower(0);
 
-        //claw = hwMap.servo.get("claw");
+
 
         FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        /*armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elbow.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
-
-        /*armLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elbow.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
-
-
-
-
-
-
-
-
-        // Define and initialize ALL installed servos.
-
-       /* imu = hwMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters); */
-
-        // CAMERA STUFF 4 (lines 119 - 126)
-        // Set sensors
-        /*camera = hwMap.get(WebcamName.class, "camera");
-
-        // camera set-up
-        int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
-        webcam = OpenCvCameraFactory.getInstance().createWebcam(camera, cameraMonitorViewId);
-        pipeline = new CapDeterminationPipeline();
-        webcam.setPipeline(pipeline);*/
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
@@ -223,13 +193,14 @@ public class DrivingBot {
     }
 
 
-    /*public void closeClaw() {
+    public void closeClaw() {
         claw.setPosition(0.4);
     }
 
     public void openClaw() {
         claw.setPosition(0);
-    }*/
+    }
+
     //When attactching servo, make sure to reset it so that it starts at 0
     //Setsposition just moves it from position
     //1 == 360
@@ -264,21 +235,18 @@ public class DrivingBot {
     }
 
 
-    /*public void moveArm(double velocity, int position) {
-        armLeft.setTargetPosition(position);
-        armRight.setTargetPosition(position);
-        armLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        armRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        ((DcMotorEx) armLeft).setVelocity(velocity);
-        ((DcMotorEx) armRight).setVelocity(velocity);
-    }*/
+    public void moveArm(double velocity, int position) {
+        arm.setTargetPosition(position);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        ((DcMotorEx) arm).setVelocity(velocity);
+    }
 
-    /*public void moveElbow(double velocity, int position) {
-        elbow.setTargetPosition(position);
-        elbow.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    public void moveWrist(double velocity, int position) {
+        wrist.setTargetPosition(position);
+        wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //robot.elbow.setPower(velocity);
-        ((DcMotorEx) elbow).setVelocity(velocity);
-    }*/
+        ((DcMotorEx) wrist).setVelocity(velocity);
+    }
 
     // CAMERA STUFF 5 (lines 278 - 285)
     /*public void closeCameraAsync() {
