@@ -19,7 +19,8 @@ public class Auto extends LinearOpMode {
         robot = new DrivingBot();
         robot.init(hardwareMap);
         //telemetry.addData("arm", robot.armLeft.getCurrentPosition());
-/*
+
+        /*
         //start camera
         robot.webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override

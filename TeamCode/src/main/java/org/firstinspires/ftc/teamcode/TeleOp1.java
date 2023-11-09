@@ -1,22 +1,4 @@
 package org.firstinspires.ftc.teamcode;
-//Initialization is useful for camera
-//init not for movement??/
-//setting camera u can reuse
-//colors u'll have to look more into ftc machine learning
-//sensors different (duh)
-//look into sensors
-//driving bot file
-//where u initialize everything ^^^^^ (might have to change a few names, servos, etc etc etc) <- template stays the same
-//functions at end of file that are like general move forward close claw
-//Framework for teleop and auto are basically the same
-    //Teleop: keep drivetrain
-    //Auto: will have to be changed
-//Only drive train should really be the same
-//Try not to reuse arm (IT WAS A MESSSSSS)
-//Scissor lift will probs have motor going clockwise or counterclockwise
-    //Elbow??? move at the same time????? how will this work??/
-    //Elbow + scissor lift at same time = angle
-//Claw will be the same
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,7 +27,7 @@ public class TeleOp1 extends LinearOpMode {
         //Updates the monitor so it shows
 
         //Todo: check this with the actual robot
-        robot.claw.setPosition(0.3);
+        //robot.claw.setPosition(0.3);
         //Move claw to lowest position??
 
         waitForStart();
@@ -54,9 +36,9 @@ public class TeleOp1 extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) { // reset arm from init
             telemetry.addData("Status", "opMode");
-            telemetry.addData("claw", robot.claw.getPosition());
-            telemetry.addData("arm v", ((DcMotorEx) robot.wrist).getVelocity());
-            telemetry.addData("left arm", robot.arm.getCurrentPosition());
+            //telemetry.addData("claw", robot.claw.getPosition());
+            //telemetry.addData("arm v", ((DcMotorEx) robot.wrist).getVelocity());
+            //telemetry.addData("left arm", robot.arm.getCurrentPosition());
             telemetry.addData("max power", max_pow);
             telemetry.update();
 
@@ -220,18 +202,18 @@ public class TeleOp1 extends LinearOpMode {
 
 
 
-    public void moveArm(double velocity, int position) {
+    /*public void moveArm(double velocity, int position) {
         robot.arm.setTargetPosition(position); //hey arm, "position" is where you want to go
         robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAAARRRGEEE ARMM!!!! (go to the set target position)
         ((DcMotorEx) robot.arm).setVelocity(velocity); //sets the velocity of the arm
-    }
+    }*/
 
-    public void moveWrist(double velocity, int position) {
+    /*public void moveWrist(double velocity, int position) {
         robot.wrist.setTargetPosition(position); //hey elbow, "position" is where you want to go
         robot.wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION); //CHAAARRRGGEEE ELBOWW!!! (go to the set target position)
         //robot.elbow.setPower(velocity);
         ((DcMotorEx) robot.wrist).setVelocity(velocity); //sets the velocity of the elbow
-    }
+    }*/
 
 
 
@@ -245,10 +227,10 @@ public class TeleOp1 extends LinearOpMode {
     //probably dont need this
     //@SuppressWarnings("unused")
 
-    public void reset_encoders() {
+    /*public void reset_encoders() {
         robot.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
         robot.wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //remove power from the motor
-    }
+    }*/
 }
 
 
