@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 
-@TeleOp(name = "Manual Control")
+@TeleOp(name = "Manual Control CLICK THIS ONE CLICK THIS ONE CLICK THIS ONE")
 
 public class BlockTeleOpDrivetrain extends LinearOpMode {
 
