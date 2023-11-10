@@ -45,15 +45,15 @@ public class AutoRedClose extends LinearOpMode {
         // for moving X, there's a minimum threshold for power in order to move
         // we had an 11 inches in one second with .3 power
         moveX(-.3);
-        sleep(273);
+        sleep(1273);
 
         telemetry.addLine("Moving Left");
         // we had 3.5 inches in one second with .1 power
-        // close needs to move about 39 inches
+        // close needs to move about 29 inches
         // 29 inches * (1second/3.5 inches) = 29/3.5 seconds = 8 3/7 seconds = 8.285714 seconds = 8285 ms
         // added 1.5 seconds for a buffer zone
         moveY(.1);
-        sleep(9585);
+        sleep(8585);
 
 
     }

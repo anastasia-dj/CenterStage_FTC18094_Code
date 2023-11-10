@@ -60,7 +60,6 @@ public class DrivingBot {
     /* Constructor */
     public DrivingBot() {
     }
-
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
