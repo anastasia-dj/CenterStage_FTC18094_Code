@@ -7,14 +7,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto", group = "LinearOpMode") //Declares as autonomous file, SDK thing
 public class Auto extends LinearOpMode {
-    
-    private DcMotor BL;
 
-    private DcMotor FL;
+    private static DcMotor BL;
 
-    private DcMotor FR;
+    private static DcMotor FL;
 
-    private DcMotor BR;
+    private static DcMotor FR;
+
+    private static DcMotor BR;
 
 
     // these two are unused
@@ -24,36 +24,40 @@ public class Auto extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-            FR = hardwareMap.get(DcMotor.class, "frontRight");
-            FL = hardwareMap.get(DcMotor.class, "frontLeft");
-            BR = hardwareMap.get(DcMotor.class, "backRight");
-            BL = hardwareMap.get(DcMotor.class, "backLeft");
+
+        FR = hardwareMap.get(DcMotor.class, "frontRight");
+        FL = hardwareMap.get(DcMotor.class, "frontLeft");
+        BR = hardwareMap.get(DcMotor.class, "backRight");
+        BL = hardwareMap.get(DcMotor.class, "backLeft");
 
 
-            // For future generations: make sure your direction's specifically for YOUR motors
-            backLeft.setDirection(DcMotor.Direction.REVERSE);
-            stopMoving();
+        // For future generations: make sure your direction's specifically for YOUR motors
+        BL.setDirection(DcMotor.Direction.REVERSE);
+        stopMoving();
 
 
-            // in milliseconds
-            telemetry.addLine("Sleeping for a second");
-            sleep(1000);
+        // in milliseconds
+        telemetry.addLine("Sleeping for a second");
+        sleep(1000);
+        waitForStart();
 
-            telemetry.addLine("Moving Right");
-            moveX(.1);
-            sleep(250);
-            telemetry.addLine("1: " + FR.getCurrentPosition());
-            sleep(250);
-            telemetry.addLine("2: " + FR.getCurrentPosition())
+        // the sleep amount is how far it goes
+        // for moving X, there's a minimum threshold for power in order to move
+        // we had an 11 inches in one second with .3 power
+        moveX(.3);
+        sleep(273);
 
-            telemetry.addLine("Moving Left")
-            moveY(.1);
-            sleep(500);
-
-
+        telemetry.addLine("Moving Left");
+        // we had 3.5 inches in one second with .1 power
+        // close needs to move about 39 inches
+        // 29 inches * (1second/3.5 inches) = 29/3.5 seconds = 8 3/7 seconds = 8.285714 seconds = 8285 ms
+        // added 1.5 seconds for a buffer zone
+        moveY(.1);
+        sleep(9585);
 
 
     }
+
 
     public static void stopMoving(){
         FR.setPower(0);
@@ -83,8 +87,5 @@ public class Auto extends LinearOpMode {
         BL.setPower(-power);
     }
 
-    public static void sleep(long ms){
-        Thread.sleep(ms);
-    }
-    
+
 }
