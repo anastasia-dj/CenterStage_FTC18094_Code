@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto", group = "LinearOpMode") //Declares as autonomous file, SDK thing
-public class Auto extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Blue Close", group = "LinearOpMode") //Declares as autonomous file, SDK thing
+public class AutoBlueClose extends LinearOpMode {
 
     private static DcMotor BL;
 
