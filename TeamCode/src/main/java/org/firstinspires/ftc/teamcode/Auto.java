@@ -29,6 +29,8 @@ public class Auto extends LinearOpMode {
             BR = hardwareMap.get(DcMotor.class, "backRight");
             BL = hardwareMap.get(DcMotor.class, "backLeft");
 
+
+            // For future generations: make sure your direction's specifically for YOUR motors
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             stopMoving();
 
@@ -39,7 +41,10 @@ public class Auto extends LinearOpMode {
 
             telemetry.addLine("Moving Right");
             moveX(.1);
-            sleep(500);
+            sleep(250);
+            telemetry.addLine("1: " + FR.getCurrentPosition());
+            sleep(250);
+            telemetry.addLine("2: " + FR.getCurrentPosition())
 
             telemetry.addLine("Moving Left")
             moveY(.1);
