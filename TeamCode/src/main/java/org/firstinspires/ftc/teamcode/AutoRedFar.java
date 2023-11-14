@@ -45,7 +45,7 @@ public class AutoRedFar extends LinearOpMode {
         // for moving X, there's a minimum threshold for power in order to move
         // we had an 11 inches in one second with .3 power
         moveX(-.3);
-        sleep(473);
+        sleep(273);
 
         telemetry.addLine("Moving Left");
         // we had 3.5 inches in one second with .1 power

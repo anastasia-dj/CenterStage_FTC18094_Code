@@ -17,6 +17,8 @@ public class AutoBlueClose extends LinearOpMode {
     private static DcMotor BR;
 
 
+
+
     // these two are unused
     int capPosition;
     private ElapsedTime runtime = new ElapsedTime();
