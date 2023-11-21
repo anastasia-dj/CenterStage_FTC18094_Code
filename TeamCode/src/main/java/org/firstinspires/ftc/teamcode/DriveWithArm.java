@@ -68,8 +68,8 @@ public class DriveWithArm extends LinearOpMode {
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
-// Without this, the REV Hub's ori90-]]]]]]]]]]]]]]]]]]]]
-// entation is assumed to be logo up / USB forward
+
+
         imu.initialize(parameters);
         Orientation angles;
 
@@ -79,7 +79,7 @@ public class DriveWithArm extends LinearOpMode {
         waitForStart();
 
 
-        Long previousTime = System.currentTimeMillis();
+        long previousTime = System.currentTimeMillis();
         while (opModeIsActive()) {
             double left_stick_y = powerCurve(-gamepad1.left_stick_y); // input range is from 1 to -1
             double left_stick_x = powerCurve(gamepad1.left_stick_x); // input range -1 - 1
@@ -114,9 +114,7 @@ public class DriveWithArm extends LinearOpMode {
             double backRightPower = (rotY + rotX - right_stick_x) / denominator;
 
 
-            //Is the telemetry lagging the whole thing behind? maybe?
-            //making the imu lag behind
-            //TODO: CHECK ANGLES AND WHETHER IT UPDATES PROPERLY!
+
 /*
 
 
