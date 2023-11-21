@@ -22,7 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
 
-@TeleOp(name = "Please say this works, I'm begging you")
+@TeleOp(name = "FOD (no arm)")
 public class TestTest extends LinearOpMode {
 
 
@@ -109,7 +109,10 @@ public class TestTest extends LinearOpMode {
             double backRightPower = (rotY + rotX - right_stick_x) / denominator;
 
 
-
+            //Is the telemetry lagging the whole thing behind? maybe?
+            //making the imu lag behind
+            //TODO: CHECK ANGLES AND WHETHER IT UPDATES PROPERLY!
+/*
 
             telemetry.addData("Left Stick X", left_stick_x);
             telemetry.addData("Left Stick Y", left_stick_y);
@@ -121,9 +124,11 @@ public class TestTest extends LinearOpMode {
             telemetry.addData("frontRightPower", frontRightPower);
             telemetry.addData("backRightPower", backRightPower);
             telemetry.update();
+*/
 
 
-
+            telemetry.addData("angles", angles);
+            telemetry.update();
 
 
 
