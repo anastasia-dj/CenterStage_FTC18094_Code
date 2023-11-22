@@ -38,7 +38,7 @@ public class DriveWithArm extends LinearOpMode {
 
 
     private static double powerCurve(double power) {
-        return power / 2.5;
+        return power / 2.2;
     }
 
 
