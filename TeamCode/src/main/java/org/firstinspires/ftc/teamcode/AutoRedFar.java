@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Red Far", group = "LinearOpMode") //Declares as autonomous file, SDK thing
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Red Far", group = "LinearOpMode")
+//Declares as autonomous file, SDK thing
 public class AutoRedFar extends LinearOpMode {
 
     private static DcMotor BL;
@@ -53,8 +54,8 @@ public class AutoRedFar extends LinearOpMode {
         // 29 inches * (1second/3.5 inches) = 29/3.5 seconds = 8 3/7 seconds = 8.285714 seconds = 8285 ms
         // added 1.5 seconds for a buffer zone
 
-        time  = 22000;
-        for ( int i = 1; i < 22000/6000; i++){
+        time = 22000;
+        for (int i = 1; i < 22000 / 6000; i++) {
             moveY(.15);
             sleep(6000);
             moveX(-.3);
@@ -65,7 +66,7 @@ public class AutoRedFar extends LinearOpMode {
     }
 
 
-    public static void stopMoving(){
+    public static void stopMoving() {
         FR.setPower(0);
         FL.setPower(0);
         BR.setPower(0);
@@ -76,7 +77,7 @@ public class AutoRedFar extends LinearOpMode {
     // We can have the go backwards be negative power
     // forward -> use positive power
     // backward -> use negative power
-    public static void moveY(double power){
+    public static void moveY(double power) {
         FR.setPower(power);
         FL.setPower(power);
         BR.setPower(power);
@@ -84,14 +85,12 @@ public class AutoRedFar extends LinearOpMode {
     }
 
     // its the same thing as moveY. Positive power is going to be right and negative is left
-    // right -> postive power
+    // right -> positive power
     // left -> negative power
-    public static void moveX(double power){
+    public static void moveX(double power) {
         FR.setPower(-power);
         FL.setPower(power);
         BR.setPower(power);
         BL.setPower(-power);
     }
-
-
 }

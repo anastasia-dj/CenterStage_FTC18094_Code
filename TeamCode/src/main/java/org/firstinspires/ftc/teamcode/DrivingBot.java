@@ -36,8 +36,8 @@ public class DrivingBot {
     //
     public Servo claw;
 
-   // public WebcamName camera; // CAMERA STUFF 1
-   // OpenCvCamera webcam; // CAMERA STUFF 2
+    // public WebcamName camera; // CAMERA STUFF 1
+    // OpenCvCamera webcam; // CAMERA STUFF 2
 
     static final double COUNTS_PER_MOTOR_REV = 560;
     static final double DRIVE_GEAR_REDUCTION = 1;     // This is < 1.0 if geared UP
@@ -60,6 +60,7 @@ public class DrivingBot {
     /* Constructor */
     public DrivingBot() {
     }
+
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
@@ -94,7 +95,6 @@ public class DrivingBot {
         //wrist.setPower(0);
 
 
-
         FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -102,7 +102,6 @@ public class DrivingBot {
 
         //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
 
 
     }
@@ -176,7 +175,8 @@ public class DrivingBot {
         FRMoving = true;
         BLMoving = true;
         BRMoving = true;
-        while (isRobotMoving()) { }
+        while (isRobotMoving()) {
+        }
         setPower(0);
     }
 

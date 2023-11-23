@@ -124,8 +124,6 @@ public class TeleOp1 extends LinearOpMode {
             } */
 
 
-
-
             // TANK DRIVE
 /*
             if (gamepad1.right_stick_y > 0.3 || gamepad1.dpad_down) {
@@ -214,7 +212,6 @@ public class TeleOp1 extends LinearOpMode {
         //robot.elbow.setPower(velocity);
         ((DcMotorEx) robot.wrist).setVelocity(velocity); //sets the velocity of the elbow
     }*/
-
 
 
     @SuppressWarnings("unused")

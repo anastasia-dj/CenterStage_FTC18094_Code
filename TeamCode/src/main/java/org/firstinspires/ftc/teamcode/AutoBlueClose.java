@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Blue Close", group = "LinearOpMode") //Declares as autonomous file, SDK thing
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Blue Close", group = "LinearOpMode")
+//Declares as autonomous file, SDK thing
 public class AutoBlueClose extends LinearOpMode {
 
     private static DcMotor BL;
@@ -15,8 +16,6 @@ public class AutoBlueClose extends LinearOpMode {
     private static DcMotor FR;
 
     private static DcMotor BR;
-
-
 
 
     // these two are unused
@@ -61,7 +60,7 @@ public class AutoBlueClose extends LinearOpMode {
     }
 
 
-    public static void stopMoving(){
+    public static void stopMoving() {
         FR.setPower(0);
         FL.setPower(0);
         BR.setPower(0);
@@ -72,7 +71,7 @@ public class AutoBlueClose extends LinearOpMode {
     // We can have the go backwards be negative power
     // forward -> use positive power
     // backward -> use negative power
-    public static void moveY(double power){
+    public static void moveY(double power) {
         FR.setPower(power);
         FL.setPower(power);
         BR.setPower(power);
@@ -82,7 +81,7 @@ public class AutoBlueClose extends LinearOpMode {
     // its the same thing as moveY. Positive power is going to be right and negative is left
     // right -> postive power
     // left -> negative power
-    public static void moveX(double power){
+    public static void moveX(double power) {
         FR.setPower(-power);
         FL.setPower(power);
         BR.setPower(power);

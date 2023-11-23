@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.hardware.adafruit.AdafruitBNO055IMU;
+
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -16,11 +17,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
 
-
 @TeleOp(name = "Manual Control CLICK THIS ONE CLICK THIS ONE CLICK THIS ONE")
 
 public class BlockTeleOpDrivetrain extends LinearOpMode {
-
 
 
     BNO055IMU imu;
@@ -36,11 +35,8 @@ public class BlockTeleOpDrivetrain extends LinearOpMode {
     private DcMotor backRight;
 
 
-
     /**
-
      * This function is executed when this OpMode is selected from the Driver Station.
-
      */
 
     @Override
@@ -54,7 +50,6 @@ public class BlockTeleOpDrivetrain extends LinearOpMode {
         float RX;
 
 
-
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         telemetry.addLine("test");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -62,7 +57,6 @@ public class BlockTeleOpDrivetrain extends LinearOpMode {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
 
         backRight = hardwareMap.get(DcMotor.class, "backRight");
-
 
 
         // Put initialization blocks here.
