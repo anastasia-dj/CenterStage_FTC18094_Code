@@ -27,10 +27,10 @@ public class AutoBlueClose extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        FR = hardwareMap.get(DcMotor.class, "frontRight");
-        FL = hardwareMap.get(DcMotor.class, "frontLeft");
-        BR = hardwareMap.get(DcMotor.class, "backRight");
-        BL = hardwareMap.get(DcMotor.class, "backLeft");
+        FR = hardwareMap.get(DcMotor.class, "FR");
+        FL = hardwareMap.get(DcMotor.class, "FL");
+        BR = hardwareMap.get(DcMotor.class, "BR");
+        BL = hardwareMap.get(DcMotor.class, "BL");
 
 
         // For future generations: make sure your direction's specifically for YOUR motors
