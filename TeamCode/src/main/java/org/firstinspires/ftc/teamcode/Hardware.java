@@ -1,0 +1,125 @@
+package org.firstinspires.ftc.teamcode;
+
+import androidx.annotation.NonNull;
+
+import com.qualcomm.hardware.bosch.BHI260IMU;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.util.RobotLog;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
+public abstract class Hardware extends LinearOpMode {
+    BHI260IMU imu;
+    DcMotorEx backLeft;
+    DcMotorEx frontLeft;
+    DcMotorEx frontRight;
+    DcMotorEx backRight;
+    DcMotorEx armLeft;
+    DcMotorEx armRight;
+    final static double ARM_ENCODER_COUNT_PER_ROTATION = 288.0;
+    final static double ARM_NORMAL_SPEED = 10.0; // degrees per second
+    final static double ARM_SLOW_SPEED = 3.0; // degrees per second
+
+
+    public void initHardware() {
+        // Initialize motors
+        frontLeft = (DcMotorEx) hardwareMap.dcMotor.get("FL");
+        frontRight = (DcMotorEx) hardwareMap.dcMotor.get("FR");
+        backLeft = (DcMotorEx) hardwareMap.dcMotor.get("BL");
+        backRight = (DcMotorEx) hardwareMap.dcMotor.get("BR");
+        armRight = (DcMotorEx) hardwareMap.dcMotor.get("ArmRight");
+        armLeft = (DcMotorEx) hardwareMap.dcMotor.get("ArmLeft");
+
+        // Initialize BHI260AP sensor
+        imu = hardwareMap.get(BHI260IMU.class, "imu");
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
+
+        imu.initialize(parameters);
+
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+
+        armLeft.setDirection(DcMotor.Direction.REVERSE);
+//        initArmMotor(armRight);
+//        initArmFollowerMotor(armLeft);
+
+        waitForStart();
+    }
+
+    public static void initArmFollowerMotor(@NonNull DcMotorEx motor) {
+        motor.setMode(RunMode.STOP_AND_RESET_ENCODER);
+        motor.setPower(0.0);
+        motor.setTargetPosition(0);
+        motor.setMode(RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+    public static void initArmMotor(@NonNull DcMotorEx motor) {
+        motor.setMode(RunMode.STOP_AND_RESET_ENCODER);
+        motor.setPower(0.0);
+        motor.setTargetPosition(0);
+        motor.setTargetPositionTolerance(10);
+
+        PIDFCoefficients pid = new PIDFCoefficients(35.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID);
+//        pid.p = 15.0;
+//        pid.i = 0.005;
+//        pid.d = 0.002;
+
+        // somewhat working...
+        //        pid.p = 15.0;
+        //        pid.i = 0.005;
+        //        pid.d = 0.002;
+
+        // original/default PID setting
+        //        pid.p = 10.0;
+        //        pid.i = 0.005;
+        //        pid.d = 0.0;
+        motor.setPIDFCoefficients(RunMode.RUN_TO_POSITION, pid);
+        RobotLog.v("Arm PID set to " + pid);
+    }
+
+    protected void moveArmMotor(DcMotorEx motor, int position, boolean slowSpeed) {
+        motor.setPower(1.0);
+        motor.setTargetPosition(position);
+        motor.setMode(RunMode.RUN_TO_POSITION);
+    }
+
+    public void moveArm(double degree, boolean slowSpeed) {
+        RobotLog.v("Arm moving to position " + degree);
+        int position = (int) Math.round(degree / 360.0 * Hardware.ARM_ENCODER_COUNT_PER_ROTATION);
+        moveArmMotor(armRight, position, slowSpeed);
+    }
+
+    // stop moving
+    public void stopMoving() {
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
+    }
+
+    // We can have the go backwards be negative power
+    // forward -> use positive power
+    // backward -> use negative power
+    public void moveY(double power) {
+        frontRight.setPower(power);
+        frontLeft.setPower(power);
+        backRight.setPower(power);
+        backLeft.setPower(power);
+    }
+
+    // its the same thing as moveY. Positive power is going to be right and negative is left
+    // right -> positive power
+    // left -> negative power
+    public void moveX(double power) {
+        frontRight.setPower(-power);
+        frontLeft.setPower(power);
+        backRight.setPower(power);
+        backLeft.setPower(-power);
+    }
+}
