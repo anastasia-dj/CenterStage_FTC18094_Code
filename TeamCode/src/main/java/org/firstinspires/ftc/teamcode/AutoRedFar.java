@@ -30,8 +30,6 @@ public class AutoRedFar extends Hardware {
         moveY(.35);
         sleep(4000);
 
-        moveX(-0.3);
-        sleep(1500);
 
 
 //        for (int i = 1; i < 22000 / 10000; i++) {
