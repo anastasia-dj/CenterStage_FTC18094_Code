@@ -16,7 +16,7 @@ public class AutoRedFar extends Hardware {
         // the sleep amount is how far it goes
         // for moving X, there's a minimum threshold for power in order to move
         // we had an 11 inches in one second with .3 power
-        moveX(-.3);
+        moveX(-.4);
         sleep(273);
 
         telemetry.addLine("Moving Left");
@@ -25,11 +25,27 @@ public class AutoRedFar extends Hardware {
         // 29 inches * (1second/3.5 inches) = 29/3.5 seconds = 8 3/7 seconds = 8.285714 seconds = 8285 ms
         // added 1.5 seconds for a buffer zone
         time = 22000;
-        for (int i = 1; i < 22000 / 6000; i++) {
-            moveY(.15);
-            sleep(6000);
-            moveX(-.3);
-            sleep(273);
-        }
+
+
+        moveY(.35);
+        sleep(4000);
+
+        moveX(-0.3);
+        sleep(1500);
+
+
+//        for (int i = 1; i < 22000 / 10000; i++) {
+//            moveY(.35);
+//            sleep(4000);
+//            moveX(-.3);
+//           sleep(273);
+//        }
+
+//        for (int i = 1; i < 22000 / 6000; i++) {
+//            moveY(.3);
+//            sleep(4000);
+//            moveX(-.3);
+//            sleep(273);
+//        }
     }
 }
