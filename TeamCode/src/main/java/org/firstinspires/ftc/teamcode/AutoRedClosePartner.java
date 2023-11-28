@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Red Close", group = "LinearOpMode")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Red Close Partner", group = "LinearOpMode")
 //Declares as autonomous file, SDK thing
 public class AutoRedClosePartner extends Hardware {
     @Override
