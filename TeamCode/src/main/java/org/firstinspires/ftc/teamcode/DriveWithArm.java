@@ -118,8 +118,9 @@ public class DriveWithArm extends Hardware {
             armRight.setPower(armPower);
             armLeft.setPower(armPower);
 
-//            // Having two PID loops trying to move both motors is making both sides fight each other.
-//            // To solve this, we will just use the right arm PID and copy the current to the left
+//            // having two PID loops trying to move both motors is making both sides fight each other
+            // (future note, one of the encoders was messed up)
+//            // to solve this we will just use the right arm PID and copy the current to the left
 //            // motor
 //            double armRightCurrent = armRight.getCurrent(CurrentUnit.AMPS);
 //            armLeft.setPower(armRightCurrent/2.0);
