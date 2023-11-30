@@ -16,7 +16,7 @@ public class DriveWithArm extends Hardware {
         if (slowSpeed)
             return power / 8.0; // In slow speed move with 1/8 of the max power
         else
-            return power / 2.2;
+            return power / 3.0;
     }
 
     private static double armPowerCurve(double power) {
@@ -86,7 +86,7 @@ public class DriveWithArm extends Hardware {
 //            }
 
             // A presses
-            boolean a = gamepad1.a;
+            boolean a = gamepad2.a;
             if (!a && previousA) {
                 // arm down position is at 0
                 antigravity = !antigravity; // toggle antigravity
@@ -98,7 +98,7 @@ public class DriveWithArm extends Hardware {
             previousA = a;
 
             // simple direct power to the arm motors
-//            boolean antigravity = gamepad1.left_bumper; // when pressed, enable arm antigravity
+//            boolean antigravity = gamepad2.left_bumper; // when pressed, enable arm antigravity
             double armAngle = 0.0;
             double armPower = 0.0; // controls the arm power use up/down on the left joystick
             if (antigravity) {
@@ -106,9 +106,9 @@ public class DriveWithArm extends Hardware {
                 armAngle = Math.toRadians((currentPosition - 20.0) / (80 - 20) * 90); // 20 is horizontal, 80 is vertical
                 double force = Math.cos(armAngle) * 0.25; // Gravity requires 0.25 power to compensate
 
-                armPower = armPowerCurve(-gamepad1.left_stick_y); // control with left stick up/down
-                double upPower = gamepad1.left_trigger * 0.5 + force / 2;
-                double downPower = gamepad1.right_trigger * 0.3 - force / 8;
+                armPower = armPowerCurve(-gamepad2.left_stick_y); // control with left stick up/down
+                double upPower = gamepad2.left_trigger * 0.5 + force / 2;
+                double downPower = gamepad2.right_trigger * 0.3 - force / 8;
                 armPower += upPower - downPower;
 
                 //                armPower += (gamepad1.dpad_up ? upPower : 0) + (gamepad1.dpad_down ? -downPower : 0); // or the dpad up/down (only on/off)

@@ -25,6 +25,6 @@ public class AutoBlueClose extends Hardware {
         // 29 inches * (1second/3.5 inches) = 29/3.5 seconds = 8 3/7 seconds = 8.285714 seconds = 8285 ms
         // added 1.5 seconds for a buffer zone
         moveY(.5);
-        sleep(1270);
+        sleep(1250);
     }
 }
