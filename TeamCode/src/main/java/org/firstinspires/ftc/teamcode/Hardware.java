@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -23,6 +24,8 @@ public abstract class Hardware extends LinearOpMode {
     DcMotorEx backRight;
     DcMotorEx armLeft;
     DcMotorEx armRight;
+    DcMotorEx wrist;
+    Servo claw;
     final static double ARM_ENCODER_COUNT_PER_ROTATION = 288.0;
     final static double ARM_NORMAL_SPEED = 10.0; // degrees per second
     final static double ARM_SLOW_SPEED = 3.0; // degrees per second
@@ -36,6 +39,9 @@ public abstract class Hardware extends LinearOpMode {
         backRight = (DcMotorEx) hardwareMap.dcMotor.get("BR");
         armRight = (DcMotorEx) hardwareMap.dcMotor.get("ArmRight");
         armLeft = (DcMotorEx) hardwareMap.dcMotor.get("ArmLeft");
+        wrist = (DcMotorEx) hardwareMap.dcMotor.get("wrist");
+        claw = hardwareMap.servo.get("claw");
+
 
         // Initialize BHI260AP sensor
         imu = hardwareMap.get(BHI260IMU.class, "imu");
@@ -48,6 +54,13 @@ public abstract class Hardware extends LinearOpMode {
         armLeft.setDirection(DcMotor.Direction.REVERSE);
 //        initArmMotor(armRight);
 //        initArmFollowerMotor(armLeft);
+
+        wrist.setMode(RunMode.STOP_AND_RESET_ENCODER);
+        wrist.setPower(0.0);
+        wrist.setTargetPosition(0);
+        wrist.setMode(RunMode.RUN_TO_POSITION);
+
+        claw.setDirection(Servo.Direction.FORWARD);
 
         waitForStart();
     }
@@ -81,6 +94,19 @@ public abstract class Hardware extends LinearOpMode {
         //        pid.d = 0.0;
         motor.setPIDFCoefficients(RunMode.RUN_TO_POSITION, pid);
         RobotLog.v("Arm PID set to " + pid);
+    }
+
+    public void moveWrist(double degree) {
+//        RobotLog.v("Wrist to position " + degree);
+        int position = (int) Math.round(degree / 360.0 * Hardware.ARM_ENCODER_COUNT_PER_ROTATION);
+        wrist.setPower(0.1);
+        wrist.setTargetPosition(position);
+        wrist.setMode(RunMode.RUN_TO_POSITION);
+    }
+
+    public void moveClaw(double position) {
+        claw.setPosition(position);
+        RobotLog.v("Claw to position " + position);
     }
 
     protected void moveArmMotor(DcMotorEx motor, int position, boolean slowSpeed) {
@@ -121,5 +147,11 @@ public abstract class Hardware extends LinearOpMode {
         frontLeft.setPower(power);
         backRight.setPower(power);
         backLeft.setPower(-power);
+    }
+
+    public static double clamp(double value, double min, double max) {
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
     }
 }

@@ -54,10 +54,12 @@ public class DriveWithArm extends Hardware {
         initArmMotorSimple(armLeft); // try directly controlling the arm motors with simple power
 
         long previousTime = System.currentTimeMillis();
-        boolean previousX = false;
-        boolean previousY = false;
-        boolean previousA = false;
+        boolean previousG1X = false;
+        boolean previousG1Y = false;
+        boolean previousG2A = false;
         boolean antigravity = false; // activates arm motor control
+        double wristAngle = 0.0;
+        double clawAngle = 0.0;
 
         while (opModeIsActive()) {
             // This is the gamepad API: https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
@@ -87,7 +89,7 @@ public class DriveWithArm extends Hardware {
 
             // A presses
             boolean a = gamepad2.a;
-            if (!a && previousA) {
+            if (!a && previousG2A) {
                 // arm down position is at 0
                 antigravity = !antigravity; // toggle antigravity
                 if (antigravity) {
@@ -95,7 +97,7 @@ public class DriveWithArm extends Hardware {
                     initArmMotorSimple(armRight);
                 }
             }
-            previousA = a;
+            previousG2A = a;
 
             // simple direct power to the arm motors
 //            boolean antigravity = gamepad2.left_bumper; // when pressed, enable arm antigravity
@@ -150,6 +152,16 @@ public class DriveWithArm extends Hardware {
             backLeft.setPower(backLeftPower);
             frontRight.setPower(frontRightPower);
             backRight.setPower(backRightPower);
+
+            // update the wrist and claw angles
+            wristAngle = clamp(wristAngle + gamepad2.right_stick_y, 0.0, 180.0);
+            clawAngle = clamp(clawAngle + gamepad2.right_stick_x/200, 0.0, 1.0);
+            // todo: change control
+            if (gamepad2.x) wristAngle = 137.0;
+            if (gamepad2.y) wristAngle = 48.0;
+            if (gamepad2.b) wristAngle = 0.0;
+            moveWrist(wristAngle);
+            moveClaw(clawAngle);
 
             // Add the time it took to run the loop to the telemetry.
             long time = System.currentTimeMillis();

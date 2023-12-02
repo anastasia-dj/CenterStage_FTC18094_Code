@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Auto Blue Far", group = "LinearOpMode")
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+@Autonomous(name = "Auto Blue Far", group = "LinearOpMode")
 //Declares as autonomous file, SDK thing
 public class AutoBlueFar extends Hardware {
     @Override
@@ -14,12 +16,13 @@ public class AutoBlueFar extends Hardware {
         waitForStart();
 
 
-        moveX(.3);
-        sleep(400);
+        //Move to the side to go around the pole
+        moveX(.4);
+        sleep(273);
 
-        telemetry.addLine("Moving Left");
+        telemetry.addLine("Moving Right");
 
-
+        //Go straight
         moveY(.35);
         sleep(4000);
     }
