@@ -161,7 +161,7 @@ public class DriveWithArm extends Hardware {
             if (gamepad2.x) wristAngle = 195.0;
             if (gamepad2.y) wristAngle = 60.0;
             if (gamepad2.b) wristAngle = 0.0;
-            if (gamepad2.left_bumper) clawAngle = 0.54;
+            if (gamepad2.left_bumper) clawAngle = 0.50;
             if (gamepad2.right_bumper) clawAngle = 0;
 
 
