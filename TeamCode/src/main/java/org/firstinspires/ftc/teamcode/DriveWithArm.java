@@ -165,8 +165,6 @@ public class DriveWithArm extends Hardware {
             if (gamepad2.right_bumper) clawAngle = 0;
 
 
-
-            // todo: change preset angles ^^^^ <- claw preset? maybe?
             moveWrist(wristAngle);
             moveClaw(clawAngle);
 
