@@ -14,16 +14,17 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 public class DriveWithArm extends Hardware {
     private static double powerCurve(double power, boolean slowSpeed) {
         if (slowSpeed)
-            return power / 8.0; // In slow speed move with 1/8 of the max power
+            return power / 8.0; // In slow speed move with 1/8 of the max power <- to make it slower, make denominator bigger
         else
-            return power / 3.0;
+            return power / 3.0; // regular power
     }
 
     private static double armPowerCurve(double power) {
-        final double calm = 2.8;
-        double value = Math.pow(Math.abs(power), calm) * Math.signum(power);
-        value = Math.min(value, 0.75); // max lifting power 0.75
-        value = Math.max(value, -0.25); // limit down power to not more then 0.25 to avoid slamming the arm
+        final double clam = 2.8;
+        double value = Math.pow(Math.abs(power), clam) * Math.signum(power);
+        value = Math.min(value, 0.95); // max lifting power 0.75
+        value = Math.max(value, -0.35); // limit down power to not more then 0.25 to avoid slamming the arm
+        RobotLog.v("value: " + value);
         return value;
     }
 
@@ -35,7 +36,7 @@ public class DriveWithArm extends Hardware {
                 " position:" + armLeft.getCurrentPosition()
 //                + " target:" + armRight.getTargetPosition()
                         + " amp:" + armRight.getCurrent(CurrentUnit.AMPS) + ":" + armLeft.getCurrent(CurrentUnit.AMPS);
-        RobotLog.v(text);
+        //RobotLog.v(text);
         telemetry.addData("arm", text);
     }
 
@@ -48,7 +49,7 @@ public class DriveWithArm extends Hardware {
 
     @Override
     public void runOpMode() {
-        initHardware(); // This initializes all the hardware
+        initHardware(); // This initializes all the hardware <- Check Hardware file for more details
 
         initArmMotorSimple(armRight); // try directly controlling the arm motors with simple power
         initArmMotorSimple(armLeft); // try directly controlling the arm motors with simple power
@@ -57,13 +58,13 @@ public class DriveWithArm extends Hardware {
         boolean previousG1X = false;
         boolean previousG1Y = false;
         boolean previousG2A = false;
-        boolean antigravity = false; // activates arm motor control
-        double wristAngle = 0.0;
-        double clawAngle = 0.0;
+        boolean antigravity = false; // activates arm motor control & gravity compensation
+        double wristAngle = 0.0; // moves to 0.0 when running
+        double clawAngle = 0.0; // moves to 0.0 when running
 
         while (opModeIsActive()) {
             // This is the gamepad API: https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
-            boolean x = gamepad1.x; // x is true when the button is pressed and false when it is released.
+            boolean x = gamepad1.x; // x is true when the button is pressed and false when it is released
             boolean y = gamepad1.y; // ditto
             boolean slowSpeed = gamepad1.left_bumper; // when pressed, slow down motion and arm
 
@@ -106,24 +107,24 @@ public class DriveWithArm extends Hardware {
             if (antigravity) {
                 int currentPosition = armLeft.getCurrentPosition();
                 armAngle = Math.toRadians((currentPosition - 20.0) / (80 - 20) * 90); // 20 is horizontal, 80 is vertical
-                double force = Math.cos(armAngle) * 0.25; // Gravity requires 0.25 power to compensate
+                double force = Math.cos(armAngle) * 0.15; // Gravity requires 0.15 (used to be 0.25) power to compensate
+                //todo: change force to make arm move slower
 
-                armPower = armPowerCurve(-gamepad2.left_stick_y); // control with left stick up/down
+                armPower = armPowerCurve(-gamepad2.left_stick_y); // control with left stick up/down //todo: remove?
                 double upPower = gamepad2.left_trigger * 0.5 + force / 2;
                 double downPower = gamepad2.right_trigger * 0.3 - force / 8;
                 armPower += upPower - downPower;
-
-                //                armPower += (gamepad1.dpad_up ? upPower : 0) + (gamepad1.dpad_down ? -downPower : 0); // or the dpad up/down (only on/off)
                 armPower += force;
-                RobotLog.v("antigravity pos:" + currentPosition + " angle:" + Math.toDegrees(armAngle) + " force:" + force);
+                RobotLog.v("armPower: " + armPower);
             }
             armRight.setPower(armPower);
             armLeft.setPower(armPower);
 
-//            // having two PID loops trying to move both motors is making both sides fight each other
-            // (future note, one of the encoders was messed up)
-//            // to solve this we will just use the right arm PID and copy the current to the left
-//            // motor
+             // having two PID loops trying to move both motors is making both sides fight each other
+              // (future note, one of the encoders was messed up lol <- that motor is marked)
+              // to solve this we will just use the right arm PID and copy the current to the left
+              // motor
+
 //            double armRightCurrent = armRight.getCurrent(CurrentUnit.AMPS);
 //            armLeft.setPower(armRightCurrent/2.0);
 
@@ -154,24 +155,36 @@ public class DriveWithArm extends Hardware {
             backRight.setPower(backRightPower);
 
             // update the wrist and claw angles
-            wristAngle = clamp(wristAngle + gamepad2.right_stick_y, 0.0, 180.0);
-            clawAngle = clamp(clawAngle + gamepad2.right_stick_x/200, 0.0, 1.0);
-            // todo: change control
-            if (gamepad2.x) wristAngle = 137.0;
-            if (gamepad2.y) wristAngle = 48.0;
+            wristAngle = clamp(wristAngle + gamepad2.right_stick_y, 0.0, 195.0);
+            clawAngle = clamp(clawAngle + gamepad2.right_stick_x / 150, 0.0, 1.0);
+            // todo: change wrist and claw control ^^^^
+            if (gamepad2.x) wristAngle = 195.0;
+            if (gamepad2.y) wristAngle = 60.0;
             if (gamepad2.b) wristAngle = 0.0;
+            if (gamepad2.left_bumper) clawAngle = 0.54;
+            if (gamepad2.right_bumper) clawAngle = 0;
+
+
+
+            // todo: change preset angles ^^^^ <- claw preset? maybe?
             moveWrist(wristAngle);
             moveClaw(clawAngle);
 
-            // Add the time it took to run the loop to the telemetry.
-            long time = System.currentTimeMillis();
-            telemetry.addData("time (ms)", time - previousTime);
-            previousTime = time;
+            // add the time it took to run the loop to the telemetry
+            //long time = System.currentTimeMillis();
+            //telemetry.addData("time (ms)", time - previousTime);
+            //previousTime = time;
 
+            // add yaw to the telemetry (used to check FOD) <- FOD = Field Oriented Driving
             telemetry.addData("yaw", yaw);
             addMotorTelemetry();
-            if (antigravity) {
-                telemetry.addData("antigravity", "on, angle:" + armAngle);
+
+            //telemetry.addData("wristAngle", wristAngle);
+            //telemetry.addData("clawAngle", clawAngle);
+
+            // shows antigravity on telemetry
+             if (antigravity) {
+                 telemetry.addData("antigravity", "on");
             }
             telemetry.update();
         }
