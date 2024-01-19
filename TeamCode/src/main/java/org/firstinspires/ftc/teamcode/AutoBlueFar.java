@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous(name = "Auto Blue Far", group = "LinearOpMode")
-//Declares as autonomous file, SDK thing
+//Declares as autonomous file, SDK thing/
 public class AutoBlueFar extends Hardware {
     @Override
     public void runOpMode() throws InterruptedException {

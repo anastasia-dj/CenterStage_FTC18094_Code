@@ -81,7 +81,7 @@ public abstract class Hardware extends LinearOpMode {
 
         PIDFCoefficients pid = new PIDFCoefficients(35.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID);
 //        pid.p = 15.0;
-//        pid.i = 0.005;
+//        pid.i = 0.005;/
 //        pid.d = 0.002;
 
         // somewhat working...

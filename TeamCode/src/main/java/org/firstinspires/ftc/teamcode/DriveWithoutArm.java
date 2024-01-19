@@ -59,7 +59,7 @@ public class DriveWithoutArm extends Hardware {
             double rotX = left_stick_x * Math.cos(-yaw) - left_stick_y * Math.sin(-yaw);
             double rotY = left_stick_x * Math.sin(-yaw) + left_stick_y * Math.cos(-yaw);
 
-            // Denominator is the largest motor power (absolute value) or 1
+            // Denominator is the largest motor power (absolute value) or 1/
             // This ensures all the powers maintain the same ratio,
             // but only if at least one is out of the range [-1, 1]
 

@@ -30,7 +30,7 @@ public class BlockTeleOpDrivetrain extends Hardware {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                // Y stick is reversed
+                // Y stick is reversed/
                 y = -gamepad1.right_stick_y;
                 x = gamepad1.right_stick_x;
                 rx = -gamepad1.left_stick_x;

@@ -21,7 +21,7 @@ public class AutoBlueClose extends Hardware {
 
         telemetry.addLine("Moving Right");
 
-        //Go straight
+        //Go straight/
         moveY(.5);
         sleep(1250);
     }

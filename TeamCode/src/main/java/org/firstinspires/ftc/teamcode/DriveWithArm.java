@@ -14,11 +14,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 public class DriveWithArm extends Hardware {
     private static double powerCurve(double power, boolean slowSpeed) {
         if (slowSpeed)
-            return power / 8.0; // In slow speed move with 1/8 of the max power <- to make it slower, make denominator bigger
+            return power / 8.0; // In slow speed move with 1/8 of the max power <- to make it slower, make denominator bigger/
         else
             return power / 3.0; // regular power
     }
-
     private static double armPowerCurve(double power) {
         final double clam = 2.8;
         double value = Math.pow(Math.abs(power), clam) * Math.signum(power);
@@ -90,7 +89,7 @@ public class DriveWithArm extends Hardware {
 
             // A presses
             boolean a = gamepad2.a;
-            if (!a && previousG2A) {
+            if (!a & previousG2A) {
                 // arm down position is at 0
                 antigravity = !antigravity; // toggle antigravity
                 if (antigravity) {
@@ -107,20 +106,25 @@ public class DriveWithArm extends Hardware {
             if (antigravity) {
                 int currentPosition = armLeft.getCurrentPosition();
                 armAngle = Math.toRadians((currentPosition - 20.0) / (80 - 20) * 90); // 20 is horizontal, 80 is vertical
-                double force = Math.cos(armAngle) * 0.15; // Gravity requires 0.15 (used to be 0.25) power to compensate
-                //todo: change force to make arm move slower
 
-                armPower = armPowerCurve(-gamepad2.left_stick_y); // control with left stick up/down //todo: remove?
+                double force = Math.cos(armAngle) * 0.15;
+                if (gamepad2.dpad_up) force = Math.cos(armAngle) * 0.37;
+
+                    // Gravity requires 0.15 (used to be 0.25) power to compensate
+
+                armPower = armPowerCurve(-gamepad2.left_stick_y); // control with left stick up/down
                 double upPower = gamepad2.left_trigger * 0.5 + force / 2;
                 double downPower = gamepad2.right_trigger * 0.3 - force / 8;
                 armPower += upPower - downPower;
                 armPower += force;
                 RobotLog.v("armPower: " + armPower);
+                telemetry.addData("force", force);
+
             }
             armRight.setPower(armPower);
             armLeft.setPower(armPower);
 
-             // having two PID loops trying to move both motors is making both sides fight each other
+              // having two PID loops trying to move both motors is making both sides fight each other
               // (future note, one of the encoders was messed up lol <- that motor is marked)
               // to solve this we will just use the right arm PID and copy the current to the left
               // motor
@@ -156,8 +160,8 @@ public class DriveWithArm extends Hardware {
 
             // update the wrist and claw angles
             wristAngle = clamp(wristAngle + gamepad2.right_stick_y, 0.0, 195.0);
-            clawAngle = clamp(clawAngle + gamepad2.right_stick_x / 150, 0.0, 1.0);
-            // todo: change wrist and claw control ^^^^
+            clawAngle = clamp(clawAngle + gamepad2.right_stick_x / 70, 0.0, 1.0);
+
             if (gamepad2.x) wristAngle = 195.0;
             if (gamepad2.y) wristAngle = 60.0;
             if (gamepad2.b) wristAngle = 0.0;
@@ -177,8 +181,9 @@ public class DriveWithArm extends Hardware {
             telemetry.addData("yaw", yaw);
             addMotorTelemetry();
 
-            //telemetry.addData("wristAngle", wristAngle);
-            //telemetry.addData("clawAngle", clawAngle);
+
+            telemetry.addData("wristAngle", wristAngle);
+            telemetry.addData("clawAngle", clawAngle);
 
             // shows antigravity on telemetry
              if (antigravity) {
