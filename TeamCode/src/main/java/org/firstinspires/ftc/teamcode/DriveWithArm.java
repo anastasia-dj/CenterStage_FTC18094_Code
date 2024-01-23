@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -12,13 +14,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 @TeleOp(name = "FOD (yes arm)")
 public class DriveWithArm extends Hardware {
-    private static double powerCurve(double power, boolean slowSpeed) {
+    public static double powerCurve(double power, boolean slowSpeed) {
         if (slowSpeed)
-            return power / 8.0; // In slow speed move with 1/8 of the max power <- to make it slower, make denominator bigger/
+            return power / 8.0; // In slow speed move with 1/8 of the max power <- to make it slower, make denominator bigger/xfwri
         else
             return power / 3.0; // regular power
     }
-    private static double armPowerCurve(double power) {
+    public static double armPowerCurve(double power) {
         final double clam = 2.8;
         double value = Math.pow(Math.abs(power), clam) * Math.signum(power);
         value = Math.min(value, 0.95); // max lifting power 0.75
@@ -59,13 +61,16 @@ public class DriveWithArm extends Hardware {
         boolean previousG2A = false;
         boolean antigravity = false; // activates arm motor control & gravity compensation
         double wristAngle = 0.0; // moves to 0.0 when running
+        //PIDFCoefficients pid = new PIDFCoefficients(15.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID); //todo: figure out p
+        //wrist.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pid);
+        //telemetry.addData("Wrist PID set to ", pid); //todo: figure out whether this works
         double clawAngle = 0.0; // moves to 0.0 when running
 
         while (opModeIsActive()) {
             // This is the gamepad API: https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
             boolean x = gamepad1.x; // x is true when the button is pressed and false when it is released
             boolean y = gamepad1.y; // ditto
-            boolean slowSpeed = gamepad1.left_bumper; // when pressed, slow down motion and arm
+            boolean slowSpeed = gamepad1.left_bumper; // when pressed, slow down motion
 
 //            // Check if x was released
 //            if (!x && previousX) {
@@ -118,7 +123,6 @@ public class DriveWithArm extends Hardware {
                 armPower += upPower - downPower;
                 armPower += force;
                 RobotLog.v("armPower: " + armPower);
-                telemetry.addData("force", force);
 
             }
             armRight.setPower(armPower);
@@ -148,6 +152,8 @@ public class DriveWithArm extends Hardware {
             // but only if at least one is out of the range [-1, 1]
 
             double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rightStickX), 1);
+            if (gamepad1.dpad_up) denominator =  Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rightStickX), 1)/2;
+
             double frontLeftPower = (rotY + rotX + rightStickX) / denominator;
             double backLeftPower = (rotY - rotX + rightStickX) / denominator;
             double frontRightPower = (rotY - rotX - rightStickX) / denominator;
@@ -167,6 +173,10 @@ public class DriveWithArm extends Hardware {
             if (gamepad2.b) wristAngle = 0.0;
             if (gamepad2.left_bumper) clawAngle = 0.50;
             if (gamepad2.right_bumper) clawAngle = 0;
+
+            //PIDFCoefficients pid = new PIDFCoefficients(35.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID);
+            //wrist.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pid);
+            //RobotLog.v("Wrist PID set to " + pid);
 
 
             moveWrist(wristAngle);

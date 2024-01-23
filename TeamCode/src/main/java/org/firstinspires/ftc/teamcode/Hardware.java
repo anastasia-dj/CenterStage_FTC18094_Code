@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public abstract class Hardware extends LinearOpMode {
     BHI260IMU imu;
@@ -154,5 +155,39 @@ public abstract class Hardware extends LinearOpMode {
         if (value < min) return min;
         if (value > max) return max;
         return value;
+    }
+
+    public static double powerCurve(double power, boolean slowSpeed) {
+        if (slowSpeed)
+            return power / 8.0; // In slow speed move with 1/8 of the max power <- to make it slower, make denominator bigger/xfwri
+        else
+            return power / 3.0; // regular power
+    }
+    public static double armPowerCurve(double power) {
+        final double clam = 2.8;
+        double value = Math.pow(Math.abs(power), clam) * Math.signum(power);
+        value = Math.min(value, 0.95); // max lifting power 0.75
+        value = Math.max(value, -0.35); // limit down power to not more then 0.25 to avoid slamming the arm
+        RobotLog.v("value: " + value);
+        return value;
+    }
+
+    public void addMotorTelemetry() {
+//        telemetry.addData(name + ".isBusy", busy);
+//        telemetry.addData(name + ".position", currentPosition);
+//        telemetry.addData(name + ".getTargetPosition", targetPosition);
+        String text =
+                " position:" + armLeft.getCurrentPosition()
+//                + " target:" + armRight.getTargetPosition()
+                        + " amp:" + armRight.getCurrent(CurrentUnit.AMPS) + ":" + armLeft.getCurrent(CurrentUnit.AMPS);
+        //RobotLog.v(text);
+        telemetry.addData("arm", text);
+    }
+
+    public void initArmMotorSimple(DcMotorEx motor) {
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor.setPower(0.0);
+        motor.setTargetPosition(0);
+        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
