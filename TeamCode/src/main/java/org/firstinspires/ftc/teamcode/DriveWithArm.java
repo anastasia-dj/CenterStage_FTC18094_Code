@@ -153,6 +153,10 @@ public class DriveWithArm extends Hardware {
 
             double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rightStickX), 1);
             if (gamepad1.dpad_up) denominator =  Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rightStickX), 1)/2;
+            if (gamepad1.a){
+                LaunchPlanes();
+            }
+
 
             double frontLeftPower = (rotY + rotX + rightStickX) / denominator;
             double backLeftPower = (rotY - rotX + rightStickX) / denominator;

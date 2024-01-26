@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
@@ -27,6 +28,7 @@ public abstract class Hardware extends LinearOpMode {
     DcMotorEx armRight;
     DcMotorEx wrist;
     Servo claw;
+    Servo Launch;
     final static double ARM_ENCODER_COUNT_PER_ROTATION = 288.0;
     final static double ARM_NORMAL_SPEED = 10.0; // degrees per second
     final static double ARM_SLOW_SPEED = 3.0; // degrees per second
@@ -42,6 +44,7 @@ public abstract class Hardware extends LinearOpMode {
         armLeft = (DcMotorEx) hardwareMap.dcMotor.get("ArmLeft");
         wrist = (DcMotorEx) hardwareMap.dcMotor.get("wrist");
         claw = hardwareMap.servo.get("claw");
+        Launch = hardwareMap.servo.get("Launch");
 
 
         // Initialize BHI260AP sensor
@@ -182,6 +185,11 @@ public abstract class Hardware extends LinearOpMode {
                         + " amp:" + armRight.getCurrent(CurrentUnit.AMPS) + ":" + armLeft.getCurrent(CurrentUnit.AMPS);
         //RobotLog.v(text);
         telemetry.addData("arm", text);
+    }
+
+    public void LaunchPlanes(){
+        Launch.setPosition(1.0); // making it do a full rotation
+        // dunno if you want comments here
     }
 
     public void initArmMotorSimple(DcMotorEx motor) {
