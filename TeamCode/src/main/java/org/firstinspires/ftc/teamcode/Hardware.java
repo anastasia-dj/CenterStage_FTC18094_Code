@@ -28,7 +28,7 @@ public abstract class Hardware extends LinearOpMode {
     DcMotorEx armRight;
     DcMotorEx wrist;
     Servo claw;
-    Servo Launch;
+    Servo launcher;
     final static double ARM_ENCODER_COUNT_PER_ROTATION = 288.0;
     final static double ARM_NORMAL_SPEED = 10.0; // degrees per second
     final static double ARM_SLOW_SPEED = 3.0; // degrees per second
@@ -44,7 +44,7 @@ public abstract class Hardware extends LinearOpMode {
         armLeft = (DcMotorEx) hardwareMap.dcMotor.get("ArmLeft");
         wrist = (DcMotorEx) hardwareMap.dcMotor.get("wrist");
         claw = hardwareMap.servo.get("claw");
-        Launch = hardwareMap.servo.get("Launch");
+        launcher = hardwareMap.servo.get("launcher");
 
 
         // Initialize BHI260AP sensor
@@ -66,6 +66,7 @@ public abstract class Hardware extends LinearOpMode {
         wrist.setMode(RunMode.RUN_TO_POSITION);
 
         claw.setDirection(Servo.Direction.FORWARD);
+        launcher.setDirection(Servo.Direction.FORWARD);
 
         waitForStart();
     }
@@ -109,9 +110,18 @@ public abstract class Hardware extends LinearOpMode {
         wrist.setMode(RunMode.RUN_TO_POSITION);
     }
 
+
+
+
+
     public void moveClaw(double position) {
         claw.setPosition(position);
         RobotLog.v("Claw to position " + position);
+    }
+
+    public void moveLauncher(double position){
+        launcher.setPosition(position);
+        telemetry.addData("launcher to position", position);
     }
 
     protected void moveArmMotor(DcMotorEx motor, int position, boolean slowSpeed) {
@@ -169,8 +179,8 @@ public abstract class Hardware extends LinearOpMode {
     public static double armPowerCurve(double power) {
         final double clam = 2.8;
         double value = Math.pow(Math.abs(power), clam) * Math.signum(power);
-        value = Math.min(value, 0.95); // max lifting power 0.75
-        value = Math.max(value, -0.35); // limit down power to not more then 0.25 to avoid slamming the arm
+        value = Math.min(value, 0.95); // max lifting power 0.95
+        value = Math.max(value, -0.35); // limit down power to not more then 0.35 to avoid slamming the arm
         RobotLog.v("value: " + value);
         return value;
     }
@@ -187,10 +197,7 @@ public abstract class Hardware extends LinearOpMode {
         telemetry.addData("arm", text);
     }
 
-    public void LaunchPlanes(){
-        Launch.setPosition(1.0); // making it do a full rotation
-        // dunno if you want comments here
-    }
+
 
     public void initArmMotorSimple(DcMotorEx motor) {
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

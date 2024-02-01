@@ -22,7 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 
 
-@TeleOp(name = "Manual Control")
+@TeleOp(name = "Emergency Manual Control")
 public class EmergencyTeleOp extends Hardware {
 
     /**
@@ -147,7 +147,7 @@ public class EmergencyTeleOp extends Hardware {
                 // Y stick is reversed/
                 y = -gamepad1.right_stick_y;
                 x = gamepad1.right_stick_x;
-                rx = -gamepad1.left_stick_x;
+                rx = gamepad1.left_stick_x;
                 RobotLog.v(String.valueOf(y));
                 RobotLog.v(String.valueOf(x));
                 RobotLog.v(String.valueOf(rx));
