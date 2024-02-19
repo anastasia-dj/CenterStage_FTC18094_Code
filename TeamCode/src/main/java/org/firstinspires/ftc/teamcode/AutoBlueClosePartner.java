@@ -25,7 +25,8 @@ public class AutoBlueClosePartner extends Hardware {
         moveY(.5);
         sleep(1250);
 
-        moveX(0.3);
-        sleep(1650);
+
+        moveX(0.7);
+        sleep( 1250);
     }
 }

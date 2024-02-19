@@ -155,10 +155,28 @@ public class EmergencyTeleOp extends Hardware {
                 // there's a divide by two in these in order to make the power smaller
                 // if you want to make the power smaller, then make the '2' higher
                 // if you want it stronger make it lower or remove the division by two
-                frontLeft.setPower((y + x + rx) / 2);
-                backLeft.setPower(((y - x) + rx) / 2);
-                frontRight.setPower(((y - x) - rx) / 2);
-                backRight.setPower(((y + x) - rx) / 2);
+                double dividedBy = 2;
+                if (gamepad1.right_bumper){
+                    dividedBy = 0.5;
+                } else if (gamepad1.left_bumper){
+                    dividedBy = 4;
+                }
+
+                frontLeft.setPower((y + x + rx) / dividedBy);
+                backLeft.setPower(((y - x) + rx) / dividedBy);
+                frontRight.setPower(((y - x) - rx) / dividedBy);
+                backRight.setPower(((y + x) - rx) / dividedBy);
+
+                if (gamepad1.a){
+                    launcher.setPosition(1);
+                    telemetry.addData("launcher to position", launcher.getPosition());
+                // making it do a full rotation
+                }
+                if (gamepad1.y){
+                    launcher.setPosition(0);
+                    telemetry.addData("launcher to position", launcher.getPosition());
+                }
+
 
 
             }

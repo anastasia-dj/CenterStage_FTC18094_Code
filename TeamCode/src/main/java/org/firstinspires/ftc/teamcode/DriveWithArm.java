@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 
-@TeleOp(name = "FOD (yes arm)")
+@TeleOp(name = "Field Oriented Driving")
 public class DriveWithArm extends Hardware {
     public static double powerCurve(double power, boolean slowSpeed) {
         if (slowSpeed)
@@ -96,18 +96,19 @@ public class DriveWithArm extends Hardware {
             // A presses
             boolean a = gamepad2.a;
             if (!a & previousG2A) {
-                // arm down position is at 0
                 antigravity = !antigravity; // toggle antigravity
                 if (antigravity) {
                     initArmMotorSimple(armLeft);
                     initArmMotorSimple(armRight);
+                    // turn on the motors
                 }
             }
             previousG2A = a;
 
+            // X presses
             boolean x = gamepad1.x;
             if (!x & previousX) {
-                emergencyDrive = !emergencyDrive;
+                emergencyDrive = !emergencyDrive; // toggle emergency drive
             }
             previousX = x;
 
@@ -154,9 +155,7 @@ public class DriveWithArm extends Hardware {
                 RobotLog.v(String.valueOf(x));
                 RobotLog.v(String.valueOf(RX));
 
-                // there's a divide by two in these in order to make the power smaller
-                // if you want to make the power smaller, then make the '2' higher
-                // if you want it stronger make it lower or remove the division by two
+                //makes power smaller or bigger (slow & fast function on the emergency drive)
                 double dividedBy = 2;
                 if (gamepad1.right_bumper){
                     dividedBy = 0.5;
@@ -219,7 +218,7 @@ public class DriveWithArm extends Hardware {
             if (gamepad1.a){
                 launcher.setPosition(1);
                 telemetry.addData("launcher to position", launcher.getPosition());
-// making it do a full rotation
+
             }
             if (gamepad1.y){
                 launcher.setPosition(0);
@@ -240,7 +239,7 @@ public class DriveWithArm extends Hardware {
             //telemetry.addData("time (ms)", time - previousTime);
             //previousTime = time;
 
-            // add yaw to the telemetry (used to check FOD) <- FOD = Field Oriented Driving
+            // adds to the telemetry which mode the robot is in
             if (emergencyDrive) {
                 telemetry.addData("mode", "Emergency Driving");
             } else {
@@ -253,8 +252,6 @@ public class DriveWithArm extends Hardware {
             // shows antigravity on telemetry
             if (antigravity) {
                 telemetry.addData("antigravity", "on");
-            } else {
-                telemetry.addData("antigravity", "OFF!!!!");
             }
             telemetry.update();
         }
