@@ -26,11 +26,7 @@ public class AutoRedClosePartner extends Hardware {
         sleep(1250);
 
 
-        moveX(-.3);
-        sleep(1650);
-
-
-        moveX(0.7);
+        moveX(-0.7);
         sleep( 1250);
     }
 }

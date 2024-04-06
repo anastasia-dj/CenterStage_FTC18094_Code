@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode;
-//todo: why won't this file work? good back up if imu dies
 
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -49,9 +48,9 @@ public class EmergencyTeleOp extends Hardware {
         boolean previousG2A = false;
         boolean antigravity = false; // activates arm motor control & gravity compensation
         double wristAngle = 0.0; // moves to 0.0 when running
-        //PIDFCoefficients pid = new PIDFCoefficients(15.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID); //todo: figure out p
+        //PIDFCoefficients pid = new PIDFCoefficients(15.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID);
         //wrist.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pid);
-        //telemetry.addData("Wrist PID set to ", pid); //todo: figure out whether this works
+        //telemetry.addData("Wrist PID set to ", pid);
         double clawAngle = 0.0; // moves to 0.0 when running
 
         waitForStart();

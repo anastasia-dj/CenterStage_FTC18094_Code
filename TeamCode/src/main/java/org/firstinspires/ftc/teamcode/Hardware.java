@@ -103,7 +103,6 @@ public abstract class Hardware extends LinearOpMode {
     }
 
     public void moveWrist(double degree) {
-//        RobotLog.v("Wrist to position " + degree);
         int position = (int) Math.round(degree / 360.0 * Hardware.ARM_ENCODER_COUNT_PER_ROTATION);
         wrist.setPower(0.1);
         wrist.setTargetPosition(position);
@@ -116,7 +115,6 @@ public abstract class Hardware extends LinearOpMode {
 
     public void moveClaw(double position) {
         claw.setPosition(position);
-        RobotLog.v("Claw to position " + position);
     }
 
     public void moveLauncher(double position){

@@ -63,7 +63,7 @@ public class DriveWithArm extends Hardware {
         boolean antigravity = false;
         boolean emergencyDrive = false; // activates arm motor control & gravity compensation
         double wristAngle = 0.0; // moves to 0.0 when running
-        //PIDFCoefficients pid = new PIDFCoefficients(15.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID); //todo: figure out p
+        //PIDFCoefficients pid = new PIDFCoefficients(15.0, 0.005, 0.002, 0.0, MotorControlAlgorithm.LegacyPID);
         //wrist.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pid);
         //telemetry.addData("Wrist PID set to ", pid);
         double clawAngle = 0.0; // moves to 0.0 when running
